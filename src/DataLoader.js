@@ -1,19 +1,21 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
-export default class DataLoader extends Component {
-  state = { data: [] };
+export default function DataLoader() {
+  const [data, setData] = useState([]);
 
-  componentDidMount() {
-    fetch("http://localhost:3001/links")
-      .then(response => response.jason())
-      .then(data =>
-        this.setState(() => {
-          return { data };
-        })
-      );
-  }
+  useEffect(() => {
+    fetch("http:localhost:3000/links/")
+    .then(response => response.json())
+    .then(data => setData(data));
+  });
 
-  render() {
-    return this.props.render(this.state.data);
-  }
+  return (
+    <div>
+      <ul>
+        {data.map(el => (
+          <li key={el.id}>{el.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
