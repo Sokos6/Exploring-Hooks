@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import useFetch from "./useFetch";
 
-export default function DataLoader() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch("http:localhost:3000/links/")
-    .then(response => response.json())
-    .then(data => setData(data));
-  });
+export default function DataLoader(props) {
+  const data = useFetch("http://localhost:3000");
 
   return (
     <div>
